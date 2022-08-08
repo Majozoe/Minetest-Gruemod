@@ -56,6 +56,12 @@ If you are downloading this from Github, extract the zip file, then make sure th
 
 
 
+< - Does this work with other versions of Minetest? - >
+
+No clue! This mod was created on Minetest 5.6.0. If it breaks on newer versions, I'll do my best to fix it, but I cannot make the same claims for older versions.
+
+
+
 < - Heeeelp! I have an issue! - >
 
 Don't worry! In the event of something crazy happening, just refer to the forum post located here (link TBD) or create an issue on [Github](https://github.com/Majozoe/Minetest-Gruemod/issues).
