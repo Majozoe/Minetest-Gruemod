@@ -64,7 +64,7 @@ No clue! This mod was created on Minetest 5.6.0. If it breaks on newer versions,
 
 < - Heeeelp! I have an issue! - >
 
-Don't worry! In the event of something crazy happening, just refer to the forum post located here (link TBD) or create an issue on [Github](https://github.com/Majozoe/Minetest-Gruemod/issues).
+Don't worry! In the event of something crazy happening, just refer to the forum post located [here](https://forum.minetest.net/viewtopic.php?f=9&t=28523) or create an issue on [Github](https://github.com/Majozoe/Minetest-Gruemod/issues).
 
 Be sure to include a description of what is going on, what you were doing, whether or not you were on singleplayer, what other mods or even what game you were using, as well as any other info you might think is necessary such as a crash log or a screenshot, etc. 
 
