@@ -2,7 +2,7 @@ The Grue - A mod for Minetest
 
 < - - - >
 
-Version: 1.0.0
+Version: 1.0.1
 
 License: CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
 
