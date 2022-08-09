@@ -33,6 +33,7 @@ minetest.register_globalstep(function(dtime)
 		local tname = grue.players[name]
 		local health = player:get_hp()
 		local position = player:get_pos()
+		position.y = position.y + 0.5		-- Done to ensure the code doesn't check the block underneath the player by accident.
 		local node = minetest.get_node(position)
 		
 		if node.name == 'ignore' then		-- Ensures people don't die due to loading issues
