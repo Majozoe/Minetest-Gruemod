@@ -10,10 +10,11 @@ License: CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
 
 Changelog 
 
-Version 1.0.0a (August 8th, 2022
+Version 1.0.0a (August 8th, 2022)
 
 - Adjusted position checking to reduce the likelihood that the mod checks the block underneath the player. This would cause the mod to return a light level of 0, and may end up with the player getting killed by the Grue in broad daylight.
 
+< - - - >
 
 < - What is this mod? - >
 
