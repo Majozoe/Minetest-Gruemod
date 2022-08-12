@@ -1,0 +1,18 @@
+# This setting controls the highest light level that the grue can attack in.
+# Range between 0-15, with 0 being the darkest, and 15 being the brightest
+# Note: Values above 10 may render torches ineffective, while 15 will cause the Grue to attack at any time.
+grue_maxlight (How much light is needed to keep the Grue away.) int 1 0 15
+
+# This setting controls how loud the audio clips in the mod are.
+# Higher values result in louder audio clips.
+grue_soundvolume (Multiplier for mod volume) float 1 0 10
+
+# This setting controls how long you can stay in the dark before you get warned by the Grue.
+# Counted in seconds.
+# If set to 0, you will get no warning.
+grue_warntime (How much time in seconds you have before being warned) float 5 0
+
+# This setting controls how long you can stay in the dark before you are killed by the Grue.
+# Counted in seconds, and takes effect after you are warned.
+# If set to 0, you will die instantly.
+grue_deathtime (How much time in seconds you have before dying) float 10 0

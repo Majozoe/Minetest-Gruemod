@@ -1,19 +1,28 @@
-The Grue - A mod for Minetest
+https://github.com/Majozoe/Minetest-Gruemod/issues
 
+The Grue - A mod for Minetest
 < - - - >
 
-Version: 1.0.0a
+Version: 1.0.1
 
 License: CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
 
 < - - - >
 
-Changelog 
+Changelog
+
+Version 1.0.1 (August 12th, 2022
+
+Added configuration options to the main menu. This is accessible by going to the settings tab, then clicking on "All Settings", then "Content: Mods", and searching for Grue.
+
+There are currently 4 options available, controlling when the grue can attack and how loud the audio cues are.
+Note: I had to resort to using what I felt was a strange method for increasing the volume for values greater than 1. I found no issues major during my short time testing it, but if you encounter any issues, please let me know.
+
+Increased the default death time from 5 seconds to 10 seconds.
 
 Version 1.0.0a (August 8th, 2022)
 
-- Adjusted position checking to reduce the likelihood that the mod checks the block underneath the player. This would cause the mod to return a light level of 0, and may end up with the player getting killed by the Grue in broad daylight.
-
+Adjusted position checking to reduce the likelihood that the mod checks the block underneath the player. This would cause the mod to return a light level of 0, and may end up with the player getting killed by the Grue in broad daylight.
 < - - - >
 
 < - What is this mod? - >
@@ -24,7 +33,7 @@ The 'Grue' mod is a mod for Minetest that implements a nefarious creature lurkin
 
 < - That's cool and all, but how does it work? - >
 
-As of right now, the game is constantly checking your light level. If it falls below a light level of 2 (0 is the lowest), then a timer starts ticking down. This timer is reset if you retreat back to a brighter area.
+As of right now, the game is constantly checking your light level. If it falls below a light level of 2 (0 is the lowest), then a timer startsticking down. This timer is reset if you retreat back to a brighter area.
 
 After 5 seconds, you'll get a warning, and after an additional 5 seconds, you will die.
 
@@ -64,15 +73,9 @@ If you are downloading this from Github, extract the zip file, then make sure th
 
 
 
-< - Does this work with other versions of Minetest? - >
-
-No clue! This mod was created on Minetest 5.6.0. If it breaks on newer versions, I'll do my best to fix it, but I cannot make the same claims for older versions.
-
-
-
 < - Heeeelp! I have an issue! - >
 
-Don't worry! In the event of something crazy happening, just refer to the forum post located [here](https://forum.minetest.net/viewtopic.php?f=9&t=28523) or create an issue on [Github](https://github.com/Majozoe/Minetest-Gruemod/issues).
+Don't worry! In the event of something crazy happening, just refer to the forum post located here (link TBD) or create an issue on the Github.
 
 Be sure to include a description of what is going on, what you were doing, whether or not you were on singleplayer, what other mods or even what game you were using, as well as any other info you might think is necessary such as a crash log or a screenshot, etc. 
 
