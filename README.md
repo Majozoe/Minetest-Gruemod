@@ -33,7 +33,7 @@ The 'Grue' mod is a mod for Minetest that implements a nefarious creature lurkin
 
 < - That's cool and all, but how does it work? - >
 
-As of right now, the game is constantly checking your light level. If it falls below a light level of 2 (0 is the lowest), then a timer startsticking down. This timer is reset if you retreat back to a brighter area.
+As of right now, the game is constantly checking your light level. If it falls below a light level of 2 (0 is the lowest), then a timer starts ticking down. This timer is reset if you retreat back to a brighter area.
 
 After 5 seconds, you'll get a warning, and after an additional 5 seconds, you will die.
 
@@ -75,7 +75,7 @@ If you are downloading this from Github, extract the zip file, then make sure th
 
 < - Heeeelp! I have an issue! - >
 
-Don't worry! In the event of something crazy happening, just refer to the forum post located here (link TBD) or create an issue on the Github.
+Don't worry! In the event of something crazy happening, just refer to the forum post located [here](https://forum.minetest.net/viewtopic.php?f=11&t=28523&p=413810#p413810) or create an issue on the Github.
 
 Be sure to include a description of what is going on, what you were doing, whether or not you were on singleplayer, what other mods or even what game you were using, as well as any other info you might think is necessary such as a crash log or a screenshot, etc. 
 
