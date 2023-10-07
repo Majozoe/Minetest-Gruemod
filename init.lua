@@ -11,7 +11,7 @@ minetest.register_on_joinplayer(function(player) -- Adds connected players to th
     local tname = grue.players[name]
 	
     if not tname then
-        grue.players[name] = { timer = 0, warned = false } -- This ties the timer and the "warned" flag to individual players, instead of to the server itself.
+        grue.players[name] = { timer = 0, warned = false, warning = nil, jumpscare = nil, hudtime = 0} -- This ties the timers and the "warned" flag to individual players, instead of to the server itself.
     end
 end)
 
@@ -35,6 +35,73 @@ local soundvolume = get_setting_value("soundvolume", 1) -- Multiplier for how lo
 local warntime = get_setting_value("warntime", 5)-- Time before you are warned about getting eaten by a Grue
 local deathtime = get_setting_value("deathtime", 10) -- Time after getting warned before you are eaten by a Grue	
 
+-- Function called to warn the player of impending doom.
+
+local function warn_player(player, position, tname)
+	local warning = player:hud_add({		-- Generates a visual warning in the center of the screen.
+		-- name = "grue warning",
+		hud_elem_type = "text",
+		position = {x = 0.5, y = 0.55},
+		offset = {x = 0, y = 0},
+		text = "You are likely to be eaten by a Grue.",
+		alignment = {x = 0, y = 0.1},
+		scale = {x = 100, y = 100},
+		number = 0xFFFFFF,
+		z_index = 100,
+		-- style = 1,
+	})
+	
+	while soundvolume > 0 do	-- Hacky way of supporting values greater than 1, since increasing the gain doesn't seem to do anything.
+		minetest.sound_play("grue_warning", {pos = position, gain = soundvolume, max_hear_distance = 8,})
+		soundvolume = soundvolume - 1
+		end
+		
+	tname.warned = true
+	tname.timer = 0
+	tname.hudtime = 0
+	tname.warning = warning
+	soundvolume = get_setting_value("soundvolume", 1) -- Reset sound value
+end
+
+-- Function to kill the player.
+
+local function kill_player(player, position, tname, name)
+
+	local jumpscare = player:hud_add({		-- Responsible for the image 'jumpscare' that shows up when you die.
+		hud_elem_type = "image",
+		scale = {x = -100, y = -100},
+		text = "grue_jumpscare.png",
+		position = {x = 0.5, y = 0.5},
+		-- alignment = {x = 0, y = 0},
+		z_index = 1000,
+	})
+
+	player:set_hp(0, set_hp)
+	while soundvolume > 0 do
+		minetest.sound_play("grue_attack", {pos = position, gain = soundvolume, max_hear_distance = 8,})
+		soundvolume = soundvolume - 1
+	end
+	
+	tname.warned = false
+	tname.timer = 0
+	soundvolume = get_setting_value("soundvolume", 1) -- Reset sound value
+	tname.jumpscare = jumpscare
+	
+end
+
+-- Called when the player respawns
+
+minetest.register_on_respawnplayer(function(ObjectRef)		
+	local name = ObjectRef:get_player_name()
+	local tname = grue.players[name]
+	
+	if (tname.jumpscare) then				-- Checks for the 'jumpscare' mentioned above. Removes it if found.
+		local player = minetest.get_player_by_name(name)
+		player:hud_remove(tname.jumpscare)
+		tname.jumpscare = nil
+	end
+end)
+
 -- Main function, checking every tick.
 
 minetest.register_globalstep(function(dtime)
@@ -45,11 +112,20 @@ minetest.register_globalstep(function(dtime)
 		local position = player:get_pos()
 		position.y = position.y + 0.5		-- Done to ensure the code doesn't check the block underneath the player by accident.
 		local node = minetest.get_node(position)
+		local player = minetest.get_player_by_name(name)
 		
 		if node.name == 'ignore' then		-- Ensures people don't die due to loading issues
 			tname.timer = 0
 			tname.warned = false
 			break
+		end
+		
+		if (tname.warning) then				-- Checks for the visual warning. Removes it after 5 seconds.
+			tname.hudtime = tname.hudtime + dtime
+			if tname.hudtime >= 5 then
+				player:hud_remove(tname.warning)
+				tname.warning = nil
+			end
 		end
 		
 		if health > 0 then					-- Making sure the player isn't dead. The Grue is only interested in live prey.
@@ -62,27 +138,12 @@ minetest.register_globalstep(function(dtime)
 				if (tname.warned == false) and (warntime ~= 0) then	-- Checking to see if the player has already been warned. Skips if player set warntime to 0
 				
 					if tname.timer >= warntime then
-						minetest.chat_send_player(name, "You are likely to be eaten by a Grue.")
-						while soundvolume > 0 do	-- Hacky way of supporting values greater than 1, since increasing the gain doesn't seem to do anything.
-							minetest.sound_play("grue_warning", {pos = position, gain = soundvolume, max_hear_distance = 8,})
-							soundvolume = soundvolume - 1
-							end
-						tname.warned = true
-						tname.timer = 0
-						soundvolume = get_setting_value("soundvolume", 1) -- Reset sound value
+						warn_player(player, position, tname)
 					end
 				else
 				
-					if tname.timer >= deathtime then	--This is the part where you die
-						player:set_hp(0, set_hp)
-						minetest.chat_send_player(name, "You have been eaten by a Grue.")
-						while soundvolume > 0 do
-							minetest.sound_play("grue_attack", {pos = position, gain = soundvolume, max_hear_distance = 8,})
-							soundvolume = soundvolume - 1
-							end
-						tname.warned = false
-						tname.timer = 0
-						soundvolume = get_setting_value("soundvolume", 1) -- Reset sound value
+					if tname.timer >= deathtime then	
+						kill_player(player, position, tname, name)
 					end					
 				end
 				
