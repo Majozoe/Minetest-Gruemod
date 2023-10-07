@@ -11,7 +11,15 @@ License: CC0 (https://creativecommons.org/publicdomain/zero/1.0/)
 
 Changelog
 
-Version 1.0.1 (August 12th, 2022
+Version 1.0.2 (October 7th, 2023)
+
+Whoops, a year late for Halloween. At least I got it this time, right? Just a tiny QOL and polish patch.
+
+Added a visual warning at the center of the screen that shows up whenever you are in danger. Should be much easier to see than the chat message in the corner of the screen, no?
+
+Added a special extra image for when you die to the Grue. Crediting 'Duckgo' for this idea.
+
+Version 1.0.1 (August 12th, 2022)
 
 Added configuration options to the main menu. This is accessible by going to the settings tab, then clicking on "All Settings", then "Content: Mods", and searching for Grue.
 
